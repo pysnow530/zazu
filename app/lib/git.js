@@ -42,11 +42,11 @@ const pull = (name, packagePath) => {
  *
  * DUPLICATE COMMENT FOR: github.install
  */
-const clone = (name, packagePath) => {
+const clone = (name, packagePath, remote) => {
   return installStatus.get(name).then((status) => {
     if (status && jetpack.exists(packagePath)) return status
     return retry(`git clone [${name}]`, () => {
-      const packageUrl = 'https://github.com/' + name + '.git'
+      const packageUrl = remote || 'https://github.com/' + name + '.git'
       return new Promise((resolve, reject) => {
         mkdirp(path.dirname(packagePath), (err) => {
           err ? reject(err) : resolve()
