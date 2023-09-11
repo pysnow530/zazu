@@ -13,8 +13,8 @@ const globalEmitter = require('../lib/globalEmitter')
 const Package = require('./package')
 
 class Plugin extends Package {
-  constructor (url, options = {}) {
-    super(url)
+  constructor (url, options = {}, remote = null) {
+    super(url, remote)
     this.id = url
     this.inputs = []
     this.outputs = []

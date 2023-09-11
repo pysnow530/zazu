@@ -99,7 +99,7 @@ class PluginWrapper extends React.Component {
     const { configuration } = this.context
     const plugins = configuration.plugins.map((plugin) => {
       if (typeof plugin === 'object') {
-        return new Plugin(plugin.name, plugin.variables)
+        return new Plugin(plugin.name, plugin.variables, plugin.remote)
       } else {
         return new Plugin(plugin)
       }

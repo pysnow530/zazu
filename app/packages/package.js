@@ -8,12 +8,13 @@ const notification = require('../lib/notification')
 const retry = require('../lib/retry')
 
 class Package {
-  constructor (url) {
+  constructor (url, remote = null) {
     this.path = path.join(configuration.pluginDir, url)
     this.url = url
     this.clone = clone
     this.pull = pull
     this.logger = logger.bindMeta({ plugin: this.url })
+    this.remote = remote
   }
 
   load () {
@@ -67,7 +68,7 @@ class Package {
   }
 
   download () {
-    return this.clone(this.url, this.path)
+    return this.clone(this.url, this.path, this.remote)
   }
 }
 
