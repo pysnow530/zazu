@@ -1,4 +1,4 @@
-const { dialog, app, globalShortcut, shell } = require('electron')
+const { dialog, app, globalShortcut, shell, ipcMain, Menu } = require('electron')
 const path = require('path')
 
 const Screens = require('./lib/screens')
@@ -13,6 +13,8 @@ const forceSingleInstance = require('./helpers/singleInstance')
 const addToStartup = require('./helpers/startup')
 const { createMenu } = require('./helpers/menu')
 const about = require('./about')
+const { menuTemplate } = require('./helpers/menu')
+const electron = require('electron')
 
 globalEmitter.on('showDebug', message => {
   logger.log('info', 'opening debug page')
@@ -99,7 +101,7 @@ app.on('ready', function () {
     width: 600,
     height: windowHeight,
     maxHeight: windowHeight,
-    show: false,
+    show: true,
     frame: false,
     resizable: false,
     transparent: true,
@@ -113,8 +115,10 @@ app.on('ready', function () {
     autoResize: true,
     url: path.join('file://', __dirname, process.env.NODE_ENV.match(/(development|test)/) ? '' : '..', '/app.html'),
     webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
       backgroundThrottling: false,
       nodeIntegration: true,
+      contextIsolation: false,
     },
   })
 
@@ -179,4 +183,38 @@ app.on('will-quit', () => {
 app.on('window-all-closed', () => {
   globalShortcut.unregisterAll()
   app.quit()
+})
+
+ipcMain.handle('getAppVersion', () => {
+  return app.getVersion()
+})
+
+ipcMain.handle('getMenu', () => {
+  return Menu
+})
+
+ipcMain.handle('createWindow', (name, options) => {
+  return windowHelper(name, options)
+})
+
+let menu
+
+ipcMain.handle('buildMenu', () => {
+  menu = Menu.buildFromTemplate(menuTemplate)
+})
+
+ipcMain.handle('popupMenu', () => {
+  menu.popup()
+})
+
+ipcMain.handle('sendEventToOtherWindows', (eventName, ...args) => {
+  console.log('-------------------------')
+  console.log(eventName)
+  console.log(args)
+  const currentWindow = electron.BrowserWindow.getFocusedWindow()
+  electron.BrowserWindow.getAllWindows().forEach((window) => {
+    if (window !== currentWindow) {
+      window.webContents.send(eventName, ...args)
+    }
+  })
 })

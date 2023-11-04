@@ -1,6 +1,6 @@
 const electron = require('electron')
 const globalEmitter = require('../lib/globalEmitter')
-const { BrowserWindow } = process.type === 'renderer' ? electron.remote : electron
+const { BrowserWindow } = electron
 
 const autoResize = (dynamicWindow) => {
   const defaultSize = {

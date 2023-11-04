@@ -5,12 +5,14 @@
     <title>Zazu</title>
     <script>
       const track = require('./lib/track')
-      const app = require('electron').remote.app
+      const { app } = require('electron')
       const env = require('./lib/env')
 
-      track.initialize('search', {
-        zazuVersion: app.getVersion(),
-        zazuEnvironment: env.name,
+      window.electronAPI.getAppVersion().then((appVersion) => {
+        track.initialize('search', {
+          zazuVersion: appVersion,
+          zazuEnvironment: env.name,
+        })
       })
     </script>
     <link href="assets/stylesheets/font-awesome.min.css" rel="stylesheet" />

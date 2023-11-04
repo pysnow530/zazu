@@ -162,7 +162,7 @@ var SearchPage = React.createClass({
     }
   },
 
-  componentWillMount: function () {
+  componentDidMount: function () {
     window.document.addEventListener('click', this.onClickOutside, false)
   },
 

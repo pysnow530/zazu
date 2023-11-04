@@ -13,3 +13,4 @@ databases
 zazu-fallback
 zazu-calculator
 .*.un~
+.idea/

@@ -1,14 +1,13 @@
-const ReactDOM = require('react-dom')
+const { createRoot } = require('react-dom/client')
 const React = require('react')
 
 const ConfigWrapper = require('./containers/configWrapper')
 const PluginWrapper = require('./containers/pluginWrapper')
 
-ReactDOM.render(
+createRoot(document.getElementById('zazu')).render(
   <ConfigWrapper>
     <PluginWrapper />
-  </ConfigWrapper>,
-  document.getElementById('zazu')
+  </ConfigWrapper>
 )
 
 // Catch `esc` or `enter` to avoid alert beep.

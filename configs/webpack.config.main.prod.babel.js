@@ -4,12 +4,12 @@
 
 import path from 'path'
 import webpack from 'webpack'
-import merge from 'webpack-merge'
+import { merge } from 'webpack-merge'
 import TerserPlugin from 'terser-webpack-plugin'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
-import baseConfig from './webpack.config.base'
+import baseConfig from './webpack.config.base.babel'
 
-export default merge.smart(baseConfig, {
+export default merge(baseConfig, {
   devtool: 'source-map',
 
   mode: 'production',
@@ -27,10 +27,12 @@ export default merge.smart(baseConfig, {
     minimizer: [
       new TerserPlugin({
         parallel: true,
-        sourceMap: true,
-        cache: true,
+        terserOptions: {
+          sourceMap: true,
+        }
       }),
     ],
+    moduleIds: 'named'
   },
 
   plugins: [

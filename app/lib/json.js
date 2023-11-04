@@ -1,7 +1,7 @@
 const electron = require('electron')
 const https = require('https')
 const http = require('http')
-const app = electron.app || electron.remote.app
+const app = electron.app
 
 module.exports = (opts) => {
   const options = Object.assign({}, opts, {

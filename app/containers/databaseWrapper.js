@@ -20,7 +20,7 @@ class DatabaseWrapper extends React.Component {
     }
   }
 
-  componentWillMount () {
+  componentDidMount () {
     this.state.database.find({}).exec((err, clickedResults) => {
       if (err) return
       this.setState({

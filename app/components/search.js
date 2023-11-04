@@ -1,16 +1,13 @@
 const React = require('react')
 const PropTypes = require('prop-types')
-const { remote } = require('electron')
-const { Menu } = remote
 
 const configuration = require('../lib/configuration')
 const globalEmitter = require('../lib/globalEmitter')
 const keyboard = require('../lib/keyboard')
 const mergeUnique = require('../lib/mergeUnique')
-const { menuTemplate } = require('../helpers/menu')
 const Style = require('./style')
 
-const menu = Menu.buildFromTemplate(menuTemplate)
+window.electronAPI.buildMenu()
 
 const css = `
   .searchInputWrapper {
@@ -124,7 +121,7 @@ class Search extends React.Component {
   }
 
   openMenu = () => {
-    menu.popup()
+    window.electronAPI.popupMenu()
   }
 
   renderMenuToggle = () => (

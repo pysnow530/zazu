@@ -22,14 +22,10 @@ class PluginLogger extends Transport {
     })
   }
 
-  log (level, message, meta, callback) {
+  log (info, callback) {
     // only log plugin error when normal user won't be affected
-    if ((this.devtoolOpened === true || this.mainWindowOpened === false) && meta.plugin) {
-      globalEmitter.emit('pluginLog', {
-        level,
-        message,
-        ...meta,
-      })
+    if ((this.devtoolOpened === true || this.mainWindowOpened === false)) {
+      globalEmitter.emit('pluginLog', info)
     }
     callback(null, true)
   }

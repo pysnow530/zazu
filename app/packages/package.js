@@ -1,7 +1,7 @@
 const path = require('path')
 const jetpack = require('fs-jetpack')
 
-const { clone, pull } = require('../lib/download')
+const { clone, pull, } = require('../lib/download')
 const configuration = require('../lib/configuration')
 const logger = require('../lib/logger')
 const notification = require('../lib/notification')
@@ -42,7 +42,7 @@ class Package {
 
   /** sometimes git is slow, so we wait a second before reading zazu.json */
   check = () => {
-    return retry(
+    let r = retry(
       `checking zazu.json in [${path.join(this.path, 'zazu.json')}]`,
       () =>
         new Promise((resolve, reject) =>
@@ -51,12 +51,13 @@ class Package {
               jetpack
                 .existsAsync(path.join(this.path, 'zazu.json'))
                 .then(result =>
-                  result === 'file' ? resolve() : reject(new Error(`result of jetpack.existsAsync is ${result}`))
+                  result === 'file' ? resolve() : reject(new Error(`result of jetpack.existsAsync is ${result}`)),
                 ),
-            500
-          )
-        )
+            500,
+          ),
+        ),
     )
+    return r
   }
 
   update () {

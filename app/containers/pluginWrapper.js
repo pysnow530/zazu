@@ -27,7 +27,10 @@ class PluginWrapper extends React.Component {
   }
 
   scopeBlock = (activePlugin, activeBlock) => {
-    this.context.logger.log('info', 'scoping block', { activePlugin, activeBlock })
+    this.context.logger.log('info', 'scoping block', {
+      activePlugin,
+      activeBlock,
+    })
     if (!activePlugin) {
       this.state.plugins.forEach((plugin) => {
         plugin.setActive(true)
@@ -39,7 +42,7 @@ class PluginWrapper extends React.Component {
     }
   }
 
-  componentWillMount () {
+  componentDidMount () {
     globalEmitter.on('updatePlugins', this.updatePackages)
     this.loadPackages()
   }
@@ -104,16 +107,19 @@ class PluginWrapper extends React.Component {
         return new Plugin(plugin)
       }
     })
-    this.setState({ plugins, loaded: 0 })
+    this.setState({
+      plugins,
+      loaded: 0,
+    })
     if (plugins.length === 0) {
       this.context.logger.log('info', 'no plugins to load')
       throw new Error('no plugins to load')
     }
     return Promise.all(plugins.map((pluginObj) => {
-      return pluginObj.load().then(() => {
-        const loaded = this.state.loaded + 1
+      pluginObj.load().then(() => {
+        this.state.loaded += 1
         this.setState({
-          loaded,
+          loaded: this.state.loaded,
         })
         track.addPageAction('loadedPackage', {
           packageType: 'plugin',
@@ -187,7 +193,7 @@ class PluginWrapper extends React.Component {
   }
 
   render () {
-    const { query, theme, results } = this.state
+    const { query, theme, results, } = this.state
     const noPlugins = this.state.plugins.length === 0
     const stillLoading = this.state.loaded !== this.state.plugins.length
     if (stillLoading) {

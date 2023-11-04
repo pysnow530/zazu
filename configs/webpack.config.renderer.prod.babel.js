@@ -5,13 +5,13 @@
 import path from 'path'
 import webpack from 'webpack'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import merge from 'webpack-merge'
 import TerserPlugin from 'terser-webpack-plugin'
-import baseConfig from './webpack.config.base'
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
+import baseConfig from './webpack.config.base.babel'
 
-export default merge.smart(baseConfig, {
+export default merge(baseConfig, {
   devtool: 'source-map',
 
   mode: 'production',
@@ -170,18 +170,13 @@ export default merge.smart(baseConfig, {
     minimizer: [
       new TerserPlugin({
         parallel: true,
-        sourceMap: true,
-        cache: true,
+        terserOptions: {
+          sourceMap: true,
+        }
       }),
-      new OptimizeCSSAssetsPlugin({
-        cssProcessorOptions: {
-          map: {
-            inline: false,
-            annotation: true,
-          },
-        },
-      }),
+      new CssMinimizerPlugin(),
     ],
+    moduleIds: 'named'
   },
 
   plugins: [
@@ -206,5 +201,7 @@ export default merge.smart(baseConfig, {
       analyzerMode: process.env.OPEN_ANALYZER === 'true' ? 'server' : 'disabled',
       openAnalyzer: process.env.OPEN_ANALYZER === 'true',
     }),
+
+    new MiniCssExtractPlugin(),
   ],
 })
