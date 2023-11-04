@@ -101,7 +101,7 @@ app.on('ready', function () {
     width: 600,
     height: windowHeight,
     maxHeight: windowHeight,
-    show: true,
+    show: false,
     frame: false,
     resizable: false,
     transparent: true,
@@ -208,9 +208,6 @@ ipcMain.handle('popupMenu', () => {
 })
 
 ipcMain.handle('sendEventToOtherWindows', (eventName, ...args) => {
-  console.log('-------------------------')
-  console.log(eventName)
-  console.log(args)
   const currentWindow = electron.BrowserWindow.getFocusedWindow()
   electron.BrowserWindow.getAllWindows().forEach((window) => {
     if (window !== currentWindow) {
