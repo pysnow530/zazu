@@ -78,7 +78,6 @@ var Form = React.createClass({
   },
   handleSubmit: function () {
       this.props.onSubmitComplete()
-    }
   },
   handleCommentUpdate: function (value) {
     this.setState({
