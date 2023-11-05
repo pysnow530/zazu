@@ -14,7 +14,6 @@ module.exports = {
     },
   },
   globals: {
-    newrelic: true,
     __nr_require: true,
   },
   env: {
@@ -22,6 +21,5 @@ module.exports = {
     node: true,
     es6: true,
     mocha: true,
-    node: true,
   },
 }

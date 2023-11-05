@@ -7,7 +7,6 @@ const External = require('../blocks/external')
 
 const npmInstall = require('../lib/npmInstall')
 const notification = require('../lib/notification')
-const track = require('../lib/track')
 const globalEmitter = require('../lib/globalEmitter')
 
 const Package = require('./package')
@@ -139,11 +138,8 @@ class Plugin extends Package {
     const promises = previousBlock.connections.map((blockId) => {
       const nextBlock = this.blocksById[blockId]
       const nextState = Object.assign({}, state, { blockId })
-      const tracer = track.tracer(this.id + '/' + nextBlock.id)
       nextState.next = this.next.bind(this, nextState)
       return nextBlock.call(nextState, this.options)
-        .then(tracer.complete)
-        .catch(tracer.error)
     })
     return Promise.all(promises)
   }
@@ -179,13 +175,10 @@ class Plugin extends Package {
         return promiseList
       }
       const blockId = input.id
-      const tracer = track.tracer(this.id + '/' + blockId)
       const inputPromise = input.search(inputText, this.options)
         .then((results) => {
           return this.transformResults(blockId, results)
         })
-        .then(tracer.complete)
-        .catch(tracer.error)
       promiseList[blockId] = inputPromise
       return promiseList
     }, {})

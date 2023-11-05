@@ -129,18 +129,6 @@ By default, Zazu will close when It loose focus, for example, clicking on other 
 }
 ~~~~
 
-### Analytics
-
-We send anonymous usage to [New Relic](https://newrelic.com/). To opt out of
-sending this anonymous data you can set `disableAnalytics` to `true` in your
-configuration.
-
-~~~ json
-{
-  "disableAnalytics": false
-}
-~~~~
-
 ## Portable Mode {#portableMode}
 
 If you want your configuration within your application folder for portability just

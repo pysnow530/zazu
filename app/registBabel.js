@@ -1,5 +1,5 @@
 require('@babel/register')({
-  ignore: [/node_modules/, /newrelic\.js/],
+  ignore: [/node_modules/],
   presets: [
     [
       '@babel/preset-env',

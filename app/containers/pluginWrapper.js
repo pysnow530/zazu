@@ -3,7 +3,6 @@ const PropTypes = require('prop-types')
 
 const Plugin = require('../packages/plugin')
 const Theme = require('../packages/theme')
-const track = require('../lib/track')
 const globalEmitter = require('../lib/globalEmitter')
 const notification = require('../lib/notification')
 const truncateResult = require('../lib/truncateResult')
@@ -91,10 +90,6 @@ class PluginWrapper extends React.Component {
     const theme = new Theme(configuration.theme, configuration.pluginDir)
     return theme.load().then(() => {
       this.setState({ theme })
-      track.addPageAction('loadedPackage', {
-        packageType: 'theme',
-        packageName: theme.url,
-      })
     })
   }
 
@@ -120,10 +115,6 @@ class PluginWrapper extends React.Component {
         this.state.loaded += 1
         this.setState({
           loaded: this.state.loaded,
-        })
-        track.addPageAction('loadedPackage', {
-          packageType: 'plugin',
-          packageName: pluginObj.id,
         })
       }, reason => {
         this.context.logger.log('error', 'failed to load plugin', reason)
@@ -183,13 +174,7 @@ class PluginWrapper extends React.Component {
 
   handleResultClick = (result) => {
     this.context.logger.log('info', 'actioned result', truncateResult(result))
-    const interaction = track.interaction()
-    interaction.setName('actioned')
-    result.next().then(() => {
-      interaction.save()
-    }).catch(() => {
-      interaction.save()
-    })
+    result.next()
   }
 
   render () {

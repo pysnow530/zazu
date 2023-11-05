@@ -3,18 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <title>Zazu</title>
-    <script>
-      const track = require('./lib/track')
-      const { app } = require('electron')
-      const env = require('./lib/env')
-
-      window.electronAPI.getAppVersion().then((appVersion) => {
-        track.initialize('search', {
-          zazuVersion: appVersion,
-          zazuEnvironment: env.name,
-        })
-      })
-    </script>
     <link href="assets/stylesheets/font-awesome.min.css" rel="stylesheet" />
   </head>
   <body>
