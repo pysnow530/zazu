@@ -216,6 +216,3 @@ ipcMain.handle('sendEventToOtherWindows', (event, eventName, ...args) => {
   })
 })
 
-ipcMain.handle('requirePackage', (event, path) => {
-  require
-})
