@@ -1,5 +1,5 @@
 const electron = require('electron')
-const EventEmitter = require('events')
+const { EventEmitter } = require('events')
 
 class MyEmitter extends EventEmitter {
   on (eventName, listener) {

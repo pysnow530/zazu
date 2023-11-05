@@ -193,7 +193,7 @@ ipcMain.handle('getMenu', () => {
   return Menu
 })
 
-ipcMain.handle('createWindow', (name, options) => {
+ipcMain.handle('createWindow', (event, name, options) => {
   return windowHelper(name, options)
 })
 
@@ -207,7 +207,7 @@ ipcMain.handle('popupMenu', () => {
   menu.popup()
 })
 
-ipcMain.handle('sendEventToOtherWindows', (eventName, ...args) => {
+ipcMain.handle('sendEventToOtherWindows', (event, eventName, ...args) => {
   const currentWindow = electron.BrowserWindow.getFocusedWindow()
   electron.BrowserWindow.getAllWindows().forEach((window) => {
     if (window !== currentWindow) {
