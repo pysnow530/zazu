@@ -7,7 +7,7 @@ class UserScript extends Block {
   constructor (data) {
     super(data)
     try {
-      const plugin = electron.remote.require(path.join(data.cwd, data.script))
+      const plugin = require(path.join(data.cwd, data.script))
       this.script = plugin({
         console: this.logger,
         cwd: data.cwd,

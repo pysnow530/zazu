@@ -7,4 +7,5 @@ window.electronAPI = {
   buildMenu: () => ipcRenderer.invoke('buildMenu'),
   popupMenu: () => ipcRenderer.invoke('popupMenu'),
   sendEventToOtherWindows: (eventName, ...args) => ipcRenderer.invoke('sendEventToOtherWindows', eventName, ...args),
+  requirePackage: () => ipcRenderer.invoke('requirePackage', path),
 }
