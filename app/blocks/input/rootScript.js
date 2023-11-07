@@ -8,7 +8,7 @@ class RootScript extends InputBlock {
   constructor (data) {
     super(data)
     try {
-      const plugin = require(path.join(data.cwd, data.script))
+      const plugin = window.builtin_require(path.join(data.cwd, data.script))
       this.script = plugin({
         console: this.logger,
         cwd: data.cwd,

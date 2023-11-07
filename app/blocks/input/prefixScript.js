@@ -11,7 +11,7 @@ class PrefixScript extends InputBlock {
     this.args = data.args || this.requiredField('args')
     this.space = !!data.space
     try {
-      const plugin = require(path.join(data.cwd, data.script))
+      const plugin = window.builtin_require(path.join(data.cwd, data.script))
       this.script = plugin({
         console: this.logger,
         cwd: data.cwd,
