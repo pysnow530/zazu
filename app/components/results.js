@@ -78,7 +78,7 @@ class Results extends React.PureComponent {
     if (layoutVersion === 'v2') {
       return (
         <div className="results" style={{ overflowY: 'auto' }}>
-          <div style={{ maxHeight: 'inherit' }} key="result-list" className="resultList">
+          <div key="result-list" className="resultList">
             {values.map((result, i) => {
               return (
                 <Result
