@@ -64,7 +64,7 @@
       "buildResources": "resources"
     }
   },
-  "browserslist": "electron 27.0",
+  "browserslist": ["electron 27.0"],
   "email": "zazu-app@googlegroups.com",
   "author": "Tiny Taco Team <zazu-app@googlegroups.com>",
   "homepage": "http://zazuapp.org",
@@ -94,8 +94,7 @@
     "request": "^2.88.0",
     "semver": "^7.5.4",
     "winston": "^3.11.0",
-    "winston-daily-rotate-file": "^4.7.1",
-    "winston-transport": "^4.6.0"
+    "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",

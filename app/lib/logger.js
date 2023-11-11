@@ -4,7 +4,6 @@ const jetpack = require('fs-jetpack')
 const util = require('util')
 
 const configuration = require('./configuration')
-const env = require('./env')
 
 jetpack.dir(configuration.logDir)
 
@@ -15,11 +14,6 @@ const transports = [
     maxFiles: 3,
   }),
 ]
-
-if (env.isRenderer) {
-  const PluginTransport = require('./pluginTransport')
-  transports.push(new PluginTransport({}))
-}
 
 const logger = winston.createLogger({
   level: 'debug',
