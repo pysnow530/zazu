@@ -4,7 +4,7 @@ const fs = require('fs')
 const json = require('./json')
 const jetpack = require('fs-jetpack')
 const decompress = require('decompress')
-const mkdirp = require('mkdirp')
+const { mkdirp } = require('mkdirp')
 const retry = require('./retry')
 const installStatus = require('./installStatus')
 
@@ -39,9 +39,7 @@ const pull = (name, packagePath) => {
 
 const download = (remote, local) => {
   return new Promise((resolve, reject) => {
-    mkdirp(path.dirname(local), (err) => {
-      err ? reject(err) : resolve()
-    })
+    mkdirp(path.dirname(local)).then(resolve).catch(reject)
   }).then(() => {
     return new Promise((resolve, reject) => {
       request(remote)

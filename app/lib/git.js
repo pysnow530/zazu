@@ -3,7 +3,7 @@ const which = require('which')
 const retry = require('./retry')
 const installStatus = require('./installStatus')
 const jetpack = require('fs-jetpack')
-const mkdirp = require('mkdirp')
+const { mkdirp } = require('mkdirp')
 const path = require('path')
 
 const git = (args, options) => {
@@ -48,9 +48,7 @@ const clone = (name, packagePath, remote) => {
     return retry(`git clone [${name}]`, () => {
       const packageUrl = remote || 'https://github.com/' + name + '.git'
       return new Promise((resolve, reject) => {
-        mkdirp(path.dirname(packagePath), (err) => {
-          err ? reject(err) : resolve()
-        })
+        mkdirp(path.dirname(packagePath)).then(resolve).catch(reject)
       }).then(() => {
         return git(['clone', packageUrl, packagePath]).catch((err) => {
           if (err.message.match(/already exists/i)) {
