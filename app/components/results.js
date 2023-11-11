@@ -25,7 +25,7 @@ class Results extends React.PureComponent {
     this.props.handleUpdateActiveIndex(index)
   }
 
-  handleTab = result => {
+  handleFocus = result => {
     const index = this.props.values.indexOf(result)
     this.props.handleUpdateActiveIndex(index)
   }
@@ -85,8 +85,9 @@ class Results extends React.PureComponent {
                   active={i === activeIndex}
                   value={result}
                   layoutVersion={layoutVersion}
+                  onMouseEnter={this.handleMouseEnter}
                   onClick={handleResultClick}
-                  handleTab={this.handleTab}
+                  handleFocus={this.handleFocus}
                   key={JSON.stringify(result) + i}
                 />
               )
@@ -105,7 +106,7 @@ class Results extends React.PureComponent {
                   active={i === activeIndex}
                   value={result}
                   onClick={handleResultClick}
-                  handleTab={this.handleTab}
+                  handleFocus={this.handleFocus}
                   key={JSON.stringify(result) + i}
                 />
               )

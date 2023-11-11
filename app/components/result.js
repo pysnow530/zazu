@@ -7,7 +7,7 @@ class Result extends React.Component {
   }
 
   handleFocus = () => {
-    this.props.handleTab(this.props.value)
+    this.props.handleFocus(this.props.value)
   }
 
   shouldComponentUpdate (nextProps) {
@@ -47,7 +47,7 @@ class Result extends React.Component {
   }
 
   render () {
-    const { active, value, layoutVersion } = this.props
+    const { active, value, layoutVersion, onMouseEnter } = this.props
 
     if (layoutVersion === 'v2') {
       return (
@@ -56,7 +56,8 @@ class Result extends React.Component {
           className={active ? 'resultItem active' : 'resultItem inactive'}
           ref={this.setReference}
           tabIndex={0}
-          onFocus={this.handleFocus}>
+          onFocus={this.handleFocus}
+          onMouseEnter={this.handleFocus}>
           {this.renderIcon()}
           <div className="content">
             <h2>{value.title}</h2>
@@ -85,7 +86,7 @@ Result.propTypes = {
   active: PropTypes.bool.isRequired,
   value: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
-  handleTab: PropTypes.func.isRequired,
+  handleFocus: PropTypes.func.isRequired,
 }
 
 module.exports = Result
