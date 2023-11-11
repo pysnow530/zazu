@@ -44,11 +44,12 @@ class DatabaseWrapper extends React.Component {
   }
 
   render () {
-    const { handleQueryChange, handleResetQuery, query, theme, results, scopeBlock } = this.props
+    const { handleQueryChange, handleResetQuery, query, theme, results, scopeBlock, layoutVersion } = this.props
     return (
       <Zazu
         query={query}
         theme={theme}
+        layoutVersion={layoutVersion}
         scopeBlock={scopeBlock}
         handleResetQuery={handleResetQuery}
         handleQueryChange={handleQueryChange}

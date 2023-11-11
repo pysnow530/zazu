@@ -70,29 +70,51 @@ class Results extends React.PureComponent {
   }
 
   render () {
-    const { values, handleResultClick, activeIndex } = this.props
+    const { values, handleResultClick, activeIndex, layoutVersion } = this.props
     if (values.length === 0) {
       return null
     }
 
-    return (
-      <div className="results" style={{ overflowY: 'auto' }}>
-        <ul style={{ maxHeight: 'inherit' }} key="result-list">
-          {values.map((result, i) => {
-            return (
-              <Result
-                active={i === activeIndex}
-                value={result}
-                onClick={handleResultClick}
-                handleTab={this.handleTab}
-                key={JSON.stringify(result) + i}
-              />
-            )
-          })}
-        </ul>
-        {this.renderPreviewFrame()}
-      </div>
-    )
+    if (layoutVersion === 'v2') {
+      return (
+        <div className="results" style={{ overflowY: 'auto' }}>
+          <div style={{ maxHeight: 'inherit' }} key="result-list" className="resultList">
+            {values.map((result, i) => {
+              return (
+                <Result
+                  active={i === activeIndex}
+                  value={result}
+                  layoutVersion={layoutVersion}
+                  onClick={handleResultClick}
+                  handleTab={this.handleTab}
+                  key={JSON.stringify(result) + i}
+                />
+              )
+            })}
+          </div>
+          {this.renderPreviewFrame()}
+        </div>
+      )
+    } else {
+      return (
+        <div className="results" style={{ overflowY: 'auto' }}>
+          <ul style={{ maxHeight: 'inherit' }} key="result-list">
+            {values.map((result, i) => {
+              return (
+                <Result
+                  active={i === activeIndex}
+                  value={result}
+                  onClick={handleResultClick}
+                  handleTab={this.handleTab}
+                  key={JSON.stringify(result) + i}
+                />
+              )
+            })}
+          </ul>
+          {this.renderPreviewFrame()}
+        </div>
+      )
+    }
   }
 }
 

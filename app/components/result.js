@@ -47,20 +47,37 @@ class Result extends React.Component {
   }
 
   render () {
-    const { active, value } = this.props
+    const { active, value, layoutVersion } = this.props
 
-    return (
-      <li
-        onClick={this.click}
-        className={active ? 'active' : 'inactive'}
-        ref={this.setReference}
-        tabIndex={0}
-        onFocus={this.handleFocus}>
-        {this.renderIcon()}
-        <h2>{value.title}</h2>
-        { value.subtitle && <h3>{value.subtitle}</h3> }
-      </li>
-    )
+    if (layoutVersion === 'v2') {
+      return (
+        <div
+          onClick={this.click}
+          className={active ? 'resultItem active' : 'resultItem inactive'}
+          ref={this.setReference}
+          tabIndex={0}
+          onFocus={this.handleFocus}>
+          {this.renderIcon()}
+          <div className="content">
+            <h2>{value.title}</h2>
+            {value.subtitle && <h3>{value.subtitle}</h3>}
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <li
+          onClick={this.click}
+          className={active ? 'active' : 'inactive'}
+          ref={this.setReference}
+          tabIndex={0}
+          onFocus={this.handleFocus}>
+          {this.renderIcon()}
+          <h2>{value.title}</h2>
+          {value.subtitle && <h3>{value.subtitle}</h3>}
+        </li>
+      )
+    }
   }
 }
 

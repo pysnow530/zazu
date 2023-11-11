@@ -125,26 +125,45 @@ class Search extends React.Component {
   }
 
   renderMenuToggle = () => (
-    <button key="button" onClick={this.openMenu} className='menuToggle fa fa-cog' />
+    <button key="button" onClick={this.openMenu} className="menuToggle fa fa-cog"/>
   )
 
   render () {
-    const { value } = this.props
+    const {
+      value,
+      layoutVersion,
+    } = this.props
 
-    return (
-      <div className="searchInputWrapper">
-        <input
-          key="input"
-          title='Search Zazu'
-          className='mousetrap'
-          ref={this.setReference}
-          type='text'
-          onChange={this.handleQueryChange}
-          value={value} />
-        {configuration.hideTrayItem ? this.renderMenuToggle() : null}
-        <Style css={css} />
-      </div>
-    )
+    if (layoutVersion === 'v2') {
+      return (
+        <div className="searchInputWrapper">
+          <input
+            key="input"
+            className="mousetrap"
+            ref={this.setReference}
+            type="text"
+            onChange={this.handleQueryChange}
+            value={value}/>
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACXBIWXMAAC4jAAAuIwF4pT92AAAADUlEQVQImWP4//8/AwAI/AL+hc2rNAAAAABJRU5ErkJggg==" alt=""/>
+          <Style css={css}/>
+        </div>
+      )
+    } else {
+      return (
+        <div className="searchInputWrapper">
+          <input
+            key="input"
+            title="Search Zazu"
+            className="mousetrap"
+            ref={this.setReference}
+            type="text"
+            onChange={this.handleQueryChange}
+            value={value}/>
+          {configuration.hideTrayItem ? this.renderMenuToggle() : null}
+          <Style css={css}/>
+        </div>
+      )
+    }
   }
 }
 

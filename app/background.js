@@ -173,6 +173,10 @@ app.on('ready', function () {
     logger.log('verbose', `sending ${type} event from toggle event`)
     globalEmitter.emit(type)
   })
+
+  globalEmitter.on('resizeWindow', (width, height) => {
+    mainWindow.setSize(width, height)
+  })
 })
 
 app.on('will-quit', () => {
@@ -214,5 +218,9 @@ ipcMain.handle('sendEventToOtherWindows', (event, eventName, ...args) => {
       window.webContents.send(eventName, ...args)
     }
   })
+})
+
+ipcMain.handle('resizeWindow', (event, width, height) => {
+  globalEmitter.emit('resizeWindow', width, height)
 })
 

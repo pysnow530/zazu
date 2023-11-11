@@ -22,6 +22,9 @@ class Theme extends Package {
     return super.load().then((plugin) => {
       this.logger.log('info', 'loading css for theme')
       this.css = plugin.css = jetpack.read(path.join(this.path, plugin.stylesheet))
+      this.layoutVersion = plugin.layoutVersion
+      this.width = plugin.width
+      this.height = plugin.height
       return plugin
     }).catch((errorMessage) => {
       notification.push({

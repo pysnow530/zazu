@@ -90,6 +90,9 @@ class PluginWrapper extends React.Component {
     const theme = new Theme(configuration.theme, configuration.pluginDir)
     return theme.load().then(() => {
       this.setState({ theme })
+      if (theme.layoutVersion === 'v2' && theme.width && theme.height) {
+        window.electronAPI.resizeWindow(theme.width, theme.height)
+      }
     })
   }
 
@@ -199,6 +202,7 @@ class PluginWrapper extends React.Component {
       <DatabaseWrapper
         query={query}
         theme={theme && theme.css}
+        layoutVersion={theme.layoutVersion}
         results={results}
         scopeBlock={this.scopeBlock}
         handleResetQuery={this.handleResetQuery}

@@ -4,6 +4,7 @@ const PropTypes = require('prop-types')
 const Style = require('../components/style')
 const Search = require('../components/search')
 const Results = require('../components/results')
+const Tips = require('../components/tips')
 const globalEmitter = require('../lib/globalEmitter')
 
 class Zazu extends React.Component {
@@ -60,19 +61,36 @@ class Zazu extends React.Component {
   }
 
   render () {
-    const { query, results, theme } = this.props
-    return (
-      <div style={{ maxHeight: 400, display: 'flex', flexDirection: 'column' }}>
-        <Style css={theme} />
-        <Search handleQueryChange={this.handleQueryChange} value={query} />
-        <Results
-          values={results}
-          activeIndex={this.state.activeIndex}
-          handleResultClick={this.handleResultClick}
-          handleUpdateActiveIndex={this.handleUpdateActiveIndex}
-        />
-      </div>
-    )
+    const { query, results, theme, layoutVersion } = this.props
+    if (layoutVersion === 'v2') {
+      return (
+        <div style={{ maxHeight: 400, display: 'flex', flexDirection: 'column' }}>
+          <Style css={theme} />
+          <Search handleQueryChange={this.handleQueryChange} value={query} layoutVersion={layoutVersion} />
+          <Results
+            values={results}
+            activeIndex={this.state.activeIndex}
+            layoutVersion={layoutVersion}
+            handleResultClick={this.handleResultClick}
+            handleUpdateActiveIndex={this.handleUpdateActiveIndex}
+          />
+          <Tips />
+        </div>
+      )
+    } else {
+      return (
+        <div style={{ maxHeight: 400, display: 'flex', flexDirection: 'column' }}>
+          <Style css={theme} />
+          <Search handleQueryChange={this.handleQueryChange} value={query} layoutVersion={layoutVersion} />
+          <Results
+            values={results}
+            activeIndex={this.state.activeIndex}
+            handleResultClick={this.handleResultClick}
+            handleUpdateActiveIndex={this.handleUpdateActiveIndex}
+          />
+        </div>
+      )
+    }
   }
 }
 
