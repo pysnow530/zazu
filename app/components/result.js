@@ -47,7 +47,7 @@ class Result extends React.Component {
   }
 
   render () {
-    const { active, value, layoutVersion, onMouseEnter } = this.props
+    const { active, value, layoutVersion} = this.props
 
     if (layoutVersion === 'v2') {
       return (
@@ -63,6 +63,7 @@ class Result extends React.Component {
             <h2>{value.title}</h2>
             {value.subtitle && <h3>{value.subtitle}</h3>}
           </div>
+          {value.imgSrc && <img className="preview" src={value.imgSrc} alt="" />}
         </div>
       )
     } else {

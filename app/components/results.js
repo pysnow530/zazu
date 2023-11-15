@@ -93,7 +93,6 @@ class Results extends React.PureComponent {
               )
             })}
           </div>
-          {this.renderPreviewFrame()}
         </div>
       )
     } else {
