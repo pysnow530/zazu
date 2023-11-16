@@ -4,6 +4,7 @@ const retry = require('./retry')
 const installStatus = require('./installStatus')
 const { cooldown } = require('./manager')
 const freshRequire = require('./pluginFreshRequire')
+const { spawn } = require('child_process')
 
 /**
  * If successful, will set the `installStatus` to `installed` and return it, to
@@ -23,18 +24,20 @@ const npmInstall = cooldown((name, packagePath) => {
     if (!dependencies) {
       return installStatus.set(name, 'nodeps')
     }
-    const packages = Object.keys(dependencies).map((packageName) => {
-      const packageVersion = dependencies[packageName]
-      return packageName + '@' + packageVersion
-    })
     return new Promise((resolve, reject) => {
-      const npm = require('npm')
-      npm.load({ production: true, optional: false, audit: false, 'strict-ssl': false }, npmErr => {
-        if (npmErr) return reject(npmErr)
-        npm.commands.install(packagePath, packages, err => {
-          if (err) return reject(err)
+      const child = spawn('npm', ['install'], {
+        stdio: 'inherit',
+        cwd: packagePath,
+        env: process.env,
+        detached: false,
+      })
+      child.on('error', (error) => {
+        reject(error)
+      })
+      child.on('exit', (code, signal) => {
+        if (code === 0) {
           installStatus.set(name, 'installed').then(resolve)
-        })
+        }
       })
     })
   })
