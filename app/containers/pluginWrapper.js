@@ -148,29 +148,31 @@ class PluginWrapper extends React.Component {
         const inputPromise = searchResults[blockId]
         return inputPromise.then((results = []) => {
           if (query !== this.state.query) return
-          // 2. Remove old block results
-          const filteredResults = this.state.results.filter((result) => {
-            const isPlugin = result.pluginName === pluginName
-            const isBlock = result.blockId === blockId
-            return !(isPlugin && isBlock)
-          })
 
-          // 3. Add new block results
-          this.setState({
-            results: filteredResults.concat(results),
+          this.setState((currentState) => {
+            // 2. Remove old block results
+            const filteredResults = currentState.results.filter((result) => {
+              const isPlugin = result.pluginName === pluginName
+              const isBlock = result.blockId === blockId
+              return !(isPlugin && isBlock)
+            })
+
+            // 3. Add new block results
+            return {results: filteredResults.concat(results)}
           })
         })
       })
 
       // 4. delete inputs that didn't respond
-      return oldResults.filter((result) => {
-        if (result.pluginName !== pluginName) return true
-        return respondedBlocks.includes(result.blockId)
+      this.setState((currentState) => {
+        result: currentState.results.filter((result) => {
+          if (result.pluginName !== pluginName) return true
+          return respondedBlocks.includes(result.blockId)
+        })
       })
     }, this.state.results)
 
     this.setState({
-      results: newResults,
       query,
     })
   }
