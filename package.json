@@ -1,6 +1,6 @@
 {
   "name": "zazu",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A cross platform productivity application.",
   "scripts": {
     "prepush": "npm run lint && npm test",
