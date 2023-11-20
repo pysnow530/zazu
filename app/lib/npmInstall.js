@@ -28,7 +28,10 @@ const npmInstall = cooldown((name, packagePath) => {
       const child = spawn('npm', ['install'], {
         stdio: 'inherit',
         cwd: packagePath,
-        env: process.env,
+        env: {
+            ...process.env,
+            PATH: '/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+        },
         detached: false,
       })
       child.on('error', (error) => {
