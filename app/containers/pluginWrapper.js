@@ -144,32 +144,36 @@ class PluginWrapper extends React.Component {
       const respondedBlocks = Object.keys(searchResults)
 
       // 1. when input resolves replace it's results
-      respondedBlocks.map((blockId) => {
+      const promises = respondedBlocks.map((blockId) => {
         const inputPromise = searchResults[blockId]
-        return inputPromise.then((results = []) => {
-          if (query !== this.state.query) return
+        return inputPromise
+          .then((results = []) => {
+            if (query !== this.state.query) return
 
-          this.setState((currentState) => {
-            // 2. Remove old block results
-            const filteredResults = currentState.results.filter((result) => {
-              const isPlugin = result.pluginName === pluginName
-              const isBlock = result.blockId === blockId
-              return !(isPlugin && isBlock)
+            this.setState((currentState) => {
+              // 2. Remove old block results
+              const filteredResults = currentState.results.filter((result) => {
+                const isPlugin = result.pluginName === pluginName
+                const isBlock = result.blockId === blockId
+                return !(isPlugin && isBlock)
+              })
+
+              // 3. Add new block results
+              return {results: filteredResults.concat(results)}
             })
-
-            // 3. Add new block results
-            return {results: filteredResults.concat(results)}
           })
-        })
       })
 
       // 4. delete inputs that didn't respond
-      this.setState((currentState) => {
-        result: currentState.results.filter((result) => {
-          if (result.pluginName !== pluginName) return true
-          return respondedBlocks.includes(result.blockId)
+      Promise.all(promises)
+        .then(() => {
+          this.setState((currentState) => ({
+            results: currentState.results.filter((result) => {
+              if (result.pluginName !== pluginName) return true
+              return respondedBlocks.includes(result.blockId)
+            })
+          }))
         })
-      })
     }, this.state.results)
 
     this.setState({
