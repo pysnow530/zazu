@@ -1,13 +1,8 @@
-## Zazu
+## Zazu2
 
-[![Join the chat at https://gitter.im/tinytacoteam/zazu](https://badges.gitter.im/tinytacoteam/zazu.svg)](https://gitter.im/tinytacoteam/zazu?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-[![Travis Build Status](https://travis-ci.org/tinytacoteam/zazu.svg?branch=master)](https://travis-ci.org/tinytacoteam/zazu)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/mhfi0vyyo7dygqiu/branch/master?svg=true)](https://ci.appveyor.com/project/blainesch/zazu)
-
-Zazu, is a cross platform and fully extensible and open source launcher for
-hackers, creators and dabblers. Download it from the [releases
-page](http://zazuapp.org/download).
+Zazu2, is a cross platform and fully extensible and open source launcher for
+hackers, creators and dabblers. It built upon the foundation of Zazu, and featuring
+a modern UI. Download it from the [releases page](https://github.com/pysnow530/zazu2/releases).
 
 Zazu was created to be a fully open source alternative to Alfred, but also be
 completely plugin based. You can remove any functionality you don't like, so if
@@ -24,17 +19,11 @@ Be sure to check out our amazing [Documentation](http://zazuapp.org).
 
 [![Zazu App - Introduction](docs/images/action-shots/video.png)](https://vimeo.com/206729309)
 
-### Package Manager
-
-Manage your plugins from within Zazu.
-
-![Zazu App - Package Manager Plugin](docs/images/action-shots/package-manager.png)
-
-### Calculator
+### Postfix Calculator
 
 Accepts some common equations for you to copy to your clipboard.
 
-![Zazu App - Calculator Plugin](docs/images/action-shots/calculator.png)
+![Zazu App - Postfix Calculator Plugin](docs/images/action-shots/calculator.png)
 
 ### Clipboard History
 
@@ -48,12 +37,6 @@ you've copied.
 Find Applications or files deep in your file system.
 
 ![Zazu App - File Finder](docs/images/action-shots/file-finder.png)
-
-### System Commands
-
-Switch on your screen saver, lock your computer, and more!
-
-![Zazu App - System](docs/images/action-shots/system.png)
 
 ### Build your own!
 
@@ -88,13 +71,9 @@ If `blur` flag is `false`, then Zazu won't hide when it lost focus.
 
 ## Deployment
 
-To deploy simple update the version in both `package.json` and
-`app/package.json` (eg `0.3.2`). After comitting you can tag the release, but
-be sure to add the `v` in front (eg `v0.3.2`). Push the commits then the tag.
-
-The CI servers will upload the assets once the tests are done passing, the new
-release should be a draft, so once all assets are published you can publish the
-release on GitHub.
+To deploy simple update the version in both `package.json` (eg `0.3.2`).
+After comitting you can tag the release, but be sure to add the `v` in
+front (eg `v0.3.2`). Push the commits then the tag.
 
 Lastly, you should re-publish the docs. Zazu uses the doc website to see if a
 new release is available so doing a quick release will allow others to download

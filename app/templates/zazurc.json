@@ -1,23 +1,14 @@
 {
-  "hotkey": "alt+space",
+  "hotkey": "cmd+space",
   "theme": "pysnow530/zazu-electron-theme",
-  "displayOn": "detect",
   "plugins": [
-    "tinytacoteam/zazu-calculator",
+    "pysnow530/zazu-postfix-calculator",
     "tinytacoteam/zazu-file-finder",
-    "tinytacoteam/zazu-template",
-    "tinytacoteam/zazu-system",
-    "tinytacoteam/zazu-package-manager",
+    "pysnow530/zazu-clipboard",
     {
       "name": "tinytacoteam/zazu-fallback",
       "variables": {
         "rootSearches": ["google"]
-      }
-    },
-    {
-      "name": "pysnow530/zazu-clipboard",
-      "variables": {
-        "ClipboardKey": "cmd+shift+v"
       }
     }
   ]
