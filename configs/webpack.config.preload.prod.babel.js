@@ -14,7 +14,7 @@ export default merge(baseConfig, {
 
   mode: 'production',
 
-  target: 'electron-main',
+  target: 'electron-preload',
 
   entry: './app/preload.js',
 

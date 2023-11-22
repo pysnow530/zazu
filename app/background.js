@@ -16,21 +16,6 @@ const about = require('./about')
 const { menuTemplate } = require('./helpers/menu')
 const electron = require('electron')
 
-globalEmitter.on('showDebug', message => {
-  logger.log('info', 'opening debug page')
-  windowHelper('debug', {
-    width: 600,
-    height: 400,
-    resizable: true,
-    title: 'Debug Zazu',
-    url: path.join('file://', __dirname, process.env.NODE_ENV.match(/(development|test)/) ? '' : '..', '/debug.html'),
-    webPreferences: {
-      nodeIntegration: true,
-    },
-  })
-  globalEmitter.emit('debuggerOpened')
-})
-
 globalEmitter.on('showAbout', message => {
   logger.log('info', 'opening about page')
   about.show()

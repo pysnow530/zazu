@@ -70,12 +70,6 @@ const trayTemplate = [
     label: 'Development',
     submenu: [
       {
-        label: 'Plugin Debugger',
-        click () {
-          globalEmitter.emit('showDebug')
-        },
-      },
-      {
         label: 'Chrome DevTools',
         accelerator: 'Alt+CmdOrCtrl+I',
         click: openDevTools,
