@@ -17,7 +17,6 @@ class Configuration {
     this.logDir = path.join(home, '.zazu/log')
     this.plugins = []
     this.loaded = false
-    this.disableAnalytics = false
     this.theme = ''
     this.hotkey = ''
     this.debug = false
@@ -40,7 +39,6 @@ class Configuration {
       this.theme = data.theme
       this.hotkey = data.hotkey
       this.displayOn = data.displayOn !== 'primary' ? 'detect' : 'primary'
-      this.disableAnalytics = data.disableAnalytics
       this.debug = data.debug
       this.hideTrayItem = data.hideTrayItem
       this.loaded = true
