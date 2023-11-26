@@ -13,7 +13,7 @@ class OpenFile extends Block {
   call (state, env = {}) {
     const fullPath = state.value.replace(/^~/, os.homedir())
     this.logger.log('info', 'Opening File', { fullPath })
-    shell.openItem(fullPath)
+    shell.openPath(fullPath)
     return state.next()
   }
 }
