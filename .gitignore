@@ -14,3 +14,5 @@ zazu-fallback
 zazu-calculator
 .*.un~
 .idea/
+*.prod.js
+*.prod.js.map

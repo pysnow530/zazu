@@ -14,20 +14,23 @@
     "build:main": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.main.prod.babel.js",
     "build:renderer": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.renderer.prod.babel.js",
     "build:preload": "cross-env NODE_ENV=production webpack --config configs/webpack.config.preload.prod.babel.js",
-    "start": "cross-env NODE_ENV=development electron -r @babel/register ./app/background.js",
-    "test": "cross-env NODE_ENV=test electron-mocha -r @babel/register --recursive test/app",
+    "start": "cross-env NODE_ENV=development electron -r @babel/register ./main.js",
+    "test": "cross-env NODE_ENV=test electron-mocha -r @babel/register --recursive test",
     "cucumber": "cucumber-js --format ./features/support/custom_formattor.js",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "docs:publish": "gulp ghpages"
+    "lint:fix": "eslint . --fix"
   },
-  "main": "app/dist/background.prod.js",
+  "main": "main.prod.js",
   "build": {
     "productName": "Zazu",
     "appId": "com.tinytacoteam.zazu",
     "npmRebuild": false,
     "files": [
-      "app",
+      "main.prod.js",
+      "preload.prod.js",
+      "renderer.prod.js",
+      "index.html",
+      "assets/",
       "package.json"
     ],
     "publish": [
@@ -63,7 +66,9 @@
       "buildResources": "resources"
     }
   },
-  "browserslist": ["electron 27.0"],
+  "browserslist": [
+    "electron 27.0"
+  ],
   "email": "zazu-app@googlegroups.com",
   "author": "Tiny Taco Team <zazu-app@googlegroups.com>",
   "homepage": "http://zazuapp.org",
@@ -92,6 +97,7 @@
     "relaxed-json": "^1.0.3",
     "request": "^2.88.0",
     "semver": "^7.5.4",
+    "update-electron-app": "^3.0.0",
     "winston": "^3.11.0",
     "winston-daily-rotate-file": "^4.7.1"
   },
@@ -130,7 +136,6 @@
     "eslint-plugin-standard": "4.1.0",
     "fs-jetpack": "^5.1.0",
     "gh-pages": "^6.0.0",
-    "gulp": "^4.0.2",
     "gulp-util": "^3.0.8",
     "husky": "^8.0.3",
     "is-travis": "^2.0.0",

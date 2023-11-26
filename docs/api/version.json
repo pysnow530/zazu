@@ -1,6 +1,0 @@
----
-layout: null
----
-{
-  "version": "v{{ site.currentAppVersion | default: '0.4.0' }}"
-}

@@ -16,11 +16,11 @@ export default merge(baseConfig, {
 
   target: 'electron-preload',
 
-  entry: './app/preload.js',
+  entry: './preload.js',
 
   output: {
-    path: path.join(__dirname, '..', 'app/dist'),
-    filename: 'preload.js',
+    path: path.join(__dirname, '..'),
+    filename: 'preload.prod.js',
   },
 
   optimization: {
