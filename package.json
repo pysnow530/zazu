@@ -22,7 +22,7 @@
   },
   "main": "main.prod.js",
   "build": {
-    "productName": "Zazu",
+    "productName": "Zazu2",
     "appId": "com.tinytacoteam.zazu",
     "npmRebuild": false,
     "files": [
@@ -69,16 +69,12 @@
   "browserslist": [
     "electron 27.0"
   ],
-  "email": "zazu-app@googlegroups.com",
-  "author": "Tiny Taco Team <zazu-app@googlegroups.com>",
-  "homepage": "http://zazuapp.org",
+  "email": "pysnow530@163.com",
+  "author": "pysnow530",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/tinytacoteam/zazu.git"
-  },
-  "bugs": {
-    "url": "https://github.com/tinytacoteam/zazu/issues"
+    "url": "https://github.com/pysnow530/zazu2"
   },
   "dependencies": {
     "auto-launch": "^5.0.6",
