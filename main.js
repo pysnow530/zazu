@@ -22,7 +22,7 @@ globalEmitter.on('showAbout', message => {
 })
 
 globalEmitter.on('openConfig', message => {
-  shell.openItem(configuration.profilePath)
+  shell.openPath(configuration.profilePath)
 })
 globalEmitter.on('reloadConfig', message => {
   app.relaunch()
